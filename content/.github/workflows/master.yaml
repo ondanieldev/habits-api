@@ -28,7 +28,7 @@ jobs:
       - name: Copy dist to virtual machine
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SSH_HOST | replace("X1", "${{") | replace("X2", "}}") }}
+          host: ${{ values.ghSecretsHost | replace("X1", "${{") | replace("X2", "}}") }}
           username: ${{ values.ghSecretsUsername | replace("X1", "${{") | replace("X2", "}}") }}
           port: ${{ values.ghSecretsPort | replace("X1", "${{") | replace("X2", "}}") }}
           key: ${{ values.ghSecretsKey | replace("X1", "${{") | replace("X2", "}}") }}
@@ -40,7 +40,7 @@ jobs:
       - name: Run production scripts
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST | replace("X1", "${{") | replace("X2", "}}") }}
+          host: ${{ values.ghSecretsHost | replace("X1", "${{") | replace("X2", "}}") }}
           username: ${{ values.ghSecretsUsername | replace("X1", "${{") | replace("X2", "}}") }}
           port: ${{ values.ghSecretsPort | replace("X1", "${{") | replace("X2", "}}") }}
           key: ${{ values.ghSecretsKey | replace("X1", "${{") | replace("X2", "}}") }}
