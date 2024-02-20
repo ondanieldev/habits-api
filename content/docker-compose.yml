@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    container_name: ${{ values.name }}
+    image: spiry-capital/${{ values.name }}:latest 
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - postgresql
+      - redis
+    restart: unless-stopped
+
+  postgresql:
+    container_name: ${{ values.name }}_postgresql
+    image: bitnami/postgresql:15.1.0
+    ports:
+      - ${POSTGRESQL_PORT_LOCAL}:5432
+    volumes:
+      - ${{ values.name }}_postgresql_volume:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+
+  redis:
+    container_name: ${{ values.name }}_redis
+    image: redis:7.0.7
+    ports:
+      - ${REDIS_PORT_LOCAL}:6379
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+
+volumes:
+  ${{ values.name }}_postgresql_volume:

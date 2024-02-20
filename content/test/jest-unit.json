@@ -1,0 +1,15 @@
+{
+  "collectCoverageFrom": [
+    "**/modules/**/*.service.ts",
+    "!**/providers/**"
+  ],
+  "coverageDirectory": "../test/coverage",
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "modulePaths": ["<rootDir>"],
+  "rootDir": "../src",
+  "testEnvironment": "node",
+  "testRegex": ".(service)\\.spec\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  }
+}
