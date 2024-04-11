@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Exclude } from 'class-transformer';
 
-import { baseMongooseSchemaOptions } from 'common/constants/mongoose.constants';
 import { BaseMongooseEntity } from 'common/entities/base-mongoose.entity';
+
+import { baseMongooseSchemaOptions } from 'providers/mongodb/constants/mongoose.constants';
 
 import { UserEntity } from './user.entity';
 

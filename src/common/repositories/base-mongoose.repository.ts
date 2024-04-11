@@ -3,7 +3,8 @@ import { Model } from 'mongoose';
 
 import { BaseMongooseEntity } from 'common/entities/base-mongoose.entity';
 import { BaseEntity } from 'common/entities/base.entity';
-import { MongooseUtils } from 'common/utils/mongoose.utils';
+
+import { MongooseUtils } from 'providers/mongodb/utils/mongoose.utils';
 
 import {
   OffsetPaginated,

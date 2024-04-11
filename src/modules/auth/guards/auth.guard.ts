@@ -8,7 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
-import { IS_PUBLIC_ROUTE_KEY } from 'modules/decorators/is-public-route.decorator';
+import { IS_PUBLIC_ROUTE_KEY } from 'modules/auth/decorators/is-public-route.decorator';
 
 import { jwtConstants } from '../constants/auth.constant';
 

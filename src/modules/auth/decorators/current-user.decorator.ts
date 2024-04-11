@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-import { AuthUserBo } from '../auth/bos/auth.bo';
+import { AuthUserBo } from '../bos/auth.bo';
 
 export const CurrentUser = createParamDecorator(
   (data: unknown, context: ExecutionContext): AuthUserBo => {
