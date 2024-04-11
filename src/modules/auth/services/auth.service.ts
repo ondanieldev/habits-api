@@ -1,6 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
+import { CreateUserBo } from 'modules/user/bos/user.bo';
+import { UserEntity } from 'modules/user/entities/user.entity';
 import { UserService } from 'modules/user/services/user.service';
 
 import { HashService } from 'providers/hash/services/hash.service';
@@ -37,5 +39,9 @@ export class AuthService {
     return {
       accessToken,
     };
+  }
+
+  async signUp(data: CreateUserBo): Promise<UserEntity> {
+    return this.usersService.create(data);
   }
 }

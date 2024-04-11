@@ -5,7 +5,7 @@ import { CurrentUser } from 'modules/decorators/current-user.decorator';
 import { PublicRoute } from 'modules/decorators/is-public-route.decorator';
 
 import { AuthUserBo } from '../bos/auth.bo';
-import { AuthSignInDto } from '../dtos/auth.dto';
+import { AuthSignInDto, AuthSignUpDto } from '../dtos/auth.dto';
 import { AuthService } from '../services/auth.service';
 
 @ApiTags('Auth')
@@ -17,6 +17,12 @@ export class AuthController {
   @Post('sign-in')
   signIn(@Body() dto: AuthSignInDto) {
     return this.authService.signIn(dto);
+  }
+
+  @PublicRoute()
+  @Post('sign-up')
+  signUp(@Body() dto: AuthSignUpDto) {
+    return this.authService.signUp(dto);
   }
 
   @ApiBearerAuth()
