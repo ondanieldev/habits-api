@@ -1,19 +1,17 @@
 version: '3'
 
 services:
-
-
-  mongodb:
-    container_name: habits-api_mongodb
-    image: mongo:7.0.8
+  postgresql:
+    container_name: habits-api_postgresql
+    image: bitnami/postgresql:15.1.0
     ports:
-      - ${MONGODB_PORT_LOCAL}:${MONGODB_PORT_DOCKER}
+      - ${POSTGRESQL_PORT_LOCAL}:${POSTGRESQL_PORT_DOCKER}
     volumes:
-      - habits-api_mongodb_volume:/data/db
+      - habits-api_postgresql_volume:/bitnami/postgresql
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
-      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
 
   redis:
     container_name: habits-api_redis
@@ -24,4 +22,4 @@ services:
       --requirepass ${REDIS_PASSWORD}
 
 volumes:
-  habits-api_mongodb_volume:
+  habits-api_postgresql_volume:
