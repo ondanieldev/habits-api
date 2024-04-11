@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+
+  mongodb:
+    container_name: habits-api_mongodb
+    image: mongo:7.0.8
+    ports:
+      - ${MONGODB_PORT_LOCAL}:${MONGODB_PORT_DOCKER}
+    volumes:
+      - habits-api_mongodb_volume:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
+
+  redis:
+    container_name: habits-api_redis
+    image: redis:7.0.7
+    ports:
+      - ${REDIS_PORT_LOCAL}:${REDIS_PORT_DOCKER}
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+
+volumes:
+  habits-api_mongodb_volume:
