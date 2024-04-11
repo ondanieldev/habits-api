@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Exclude } from 'class-transformer';
 
 import { baseMongooseSchemaOptions } from 'common/constants/mongoose.constants';
 import { BaseMongooseEntity } from 'common/entities/base-mongoose.entity';
@@ -7,7 +8,7 @@ import { UserEntity } from './user.entity';
 
 @Schema({
   collection: 'users',
-  ...baseMongooseSchemaOptions,
+  ...baseMongooseSchemaOptions(UserMongooseEntity),
 })
 export class UserMongooseEntity
   extends BaseMongooseEntity
@@ -16,6 +17,7 @@ export class UserMongooseEntity
   @Prop({ required: true })
   email: string;
 
+  @Exclude()
   @Prop({ required: true })
   password: string;
 }

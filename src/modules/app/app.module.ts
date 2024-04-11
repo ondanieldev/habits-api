@@ -1,5 +1,7 @@
-import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+
+import { ClassSerializerInterceptor } from 'common/interceptors/class-serializer.interceptor';
 
 import { CacheModule } from 'providers/cache/cache.module';
 import { HashModule } from 'providers/hash/hash.module';
