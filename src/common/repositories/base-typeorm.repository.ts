@@ -7,6 +7,7 @@ import {
   FindOptionsWhere,
   Repository,
 } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 import {
   OffsetPaginated,
@@ -21,8 +22,9 @@ export class BaseTypeormRepository<
   TTypeormEntity extends TEntity,
   TEntity extends object,
   TCreate extends object,
+  TFind extends object = Partial<TEntity>,
   TRelations extends string[] = [],
-> implements BaseRepository<TEntity, TCreate, TRelations>
+> implements BaseRepository<TEntity, TCreate, TFind, TRelations>
 {
   protected readonly ormRepository: Repository<TTypeormEntity>;
   protected readonly offsetPaginationUtils = new OffsetPaginationUtils();
@@ -51,7 +53,7 @@ export class BaseTypeormRepository<
     data,
     relations,
   }: {
-    data: Partial<TEntity> | Partial<TEntity>[];
+    data: TFind | TFind[];
     relations?: TRelations;
   }): Promise<TEntity | null> {
     const entity = await this.ormRepository.findOne({
@@ -68,7 +70,7 @@ export class BaseTypeormRepository<
     pagination,
     relations,
   }: {
-    data: Partial<TEntity> | Partial<TEntity>[];
+    data: TFind | TFind[];
     pagination?: OffsetPaginationBo;
     order?: OrderBo<TEntity>;
     relations?: TRelations;
@@ -100,12 +102,12 @@ export class BaseTypeormRepository<
     findData,
     updateData,
   }: {
-    findData: Partial<TEntity>;
+    findData: TFind;
     updateData: Partial<TEntity>;
   }): Promise<TEntity[]> {
     const entity = await this.ormRepository.update(
       findData as FindOptionsWhere<TTypeormEntity>,
-      updateData as DeepPartial<TTypeormEntity>,
+      updateData as QueryDeepPartialEntity<TTypeormEntity>,
     );
     return entity.generatedMaps as TEntity[];
   }

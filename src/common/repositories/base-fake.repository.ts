@@ -11,8 +11,9 @@ import { BaseRepository } from './base.repository';
 export class BaseFakeRepository<
   TEntity extends BaseEntity,
   TCreate extends object,
+  TFind extends object = Partial<TEntity>,
   TRelations extends string[] = [],
-> implements BaseRepository<TEntity, TCreate, TRelations>
+> implements BaseRepository<TEntity, TCreate, TFind, TRelations>
 {
   protected items: TEntity[] = [];
 
@@ -28,10 +29,7 @@ export class BaseFakeRepository<
     return entity;
   }
 
-  private isMatch(
-    entity: TEntity,
-    findData: Partial<TEntity> | Partial<TEntity>[],
-  ): boolean {
+  private isMatch(entity: TEntity, findData: TFind | TFind[]): boolean {
     if (entity.deletedAt) {
       return false;
     }
@@ -74,9 +72,7 @@ export class BaseFakeRepository<
   }
 
   public async find(
-    {
-      data,
-    }: { data: Partial<TEntity> | Partial<TEntity>[]; relations: TRelations },
+    { data }: { data: TFind | TFind[]; relations: TRelations },
     // relations?: TRelations,
   ): Promise<TEntity | null> {
     const entity = this.items.find((item) => this.isMatch(item, data));
@@ -88,7 +84,7 @@ export class BaseFakeRepository<
     data,
     pagination,
   }: {
-    data: Partial<TEntity> | Partial<TEntity>[];
+    data: TFind | TFind[];
     pagination?: OffsetPaginationBo;
     order?: OrderBo<TEntity>;
     relations?: TRelations;
@@ -131,7 +127,7 @@ export class BaseFakeRepository<
     findData,
     updateData,
   }: {
-    findData: Partial<TEntity>;
+    findData: TFind;
     updateData: Partial<TEntity>;
   }): Promise<TEntity[]> {
     const entities = this.items.filter((item) => this.isMatch(item, findData));

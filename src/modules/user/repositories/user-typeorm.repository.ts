@@ -14,6 +14,7 @@ export class UserTypeormRepository
     UserTypeormEntity,
     UserEntity,
     CreateUserBo,
+    Partial<UserEntity>,
     UserRelation[]
   >
   implements UserRepository

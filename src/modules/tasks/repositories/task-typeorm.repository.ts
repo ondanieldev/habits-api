@@ -14,6 +14,7 @@ export class TaskTypeormRepository
     TaskTypeormEntity,
     TaskEntity,
     CreateTaskBo,
+    Partial<TaskEntity>,
     TaskRelation[]
   >
   implements TaskRepository

@@ -3,7 +3,10 @@ import { DataSource } from 'typeorm';
 
 import { BaseTypeormRepository } from 'common/repositories/base-typeorm.repository';
 
-import { CreateCompletedTaskBo } from '../bos/completed-task.bo';
+import {
+  CreateCompletedTaskBo,
+  ReadCompletedTaskBo,
+} from '../bos/completed-task.bo';
 import { CompletedTaskTypeormEntity } from '../entities/completed-task-typeorm.entity';
 import {
   CompletedTaskEntity,
@@ -17,6 +20,7 @@ export class CompletedTaskTypeormRepository
     CompletedTaskTypeormEntity,
     CompletedTaskEntity,
     CreateCompletedTaskBo,
+    ReadCompletedTaskBo,
     CompletedTaskRelation[]
   >
   implements CompletedTaskRepository

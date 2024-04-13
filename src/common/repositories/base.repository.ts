@@ -7,6 +7,7 @@ import { OrderBo } from 'common/bos/order.bo';
 export class BaseRepository<
   TEntity extends object,
   TCreate extends object,
+  TFind extends object = Partial<TEntity>,
   TRelations extends string[] = [],
 > {
   create: (data: TCreate) => Promise<TEntity>;
@@ -14,12 +15,12 @@ export class BaseRepository<
   delete: (id: string) => Promise<void>;
 
   find: ({}: {
-    data: Partial<TEntity> | Partial<TEntity>[];
+    data: TFind | TFind[];
     relations?: TRelations;
   }) => Promise<TEntity | null>;
 
   findMany: ({}: {
-    data: Partial<TEntity> | Partial<TEntity>[];
+    data: TFind | TFind[];
     order?: OrderBo<TEntity>;
     pagination?: OffsetPaginationBo;
     relations?: TRelations;
@@ -30,7 +31,7 @@ export class BaseRepository<
   softDelete: (id: string) => Promise<void>;
 
   update: ({}: {
-    findData: Partial<TEntity>;
+    findData: TFind;
     updateData: Partial<TEntity>;
   }) => Promise<TEntity[]>;
 }
