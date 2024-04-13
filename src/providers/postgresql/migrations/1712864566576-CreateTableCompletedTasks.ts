@@ -5,11 +5,13 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class CreateTableTasks1712864566576 implements MigrationInterface {
+export class CreateTableCompletedTasks1712864566576
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tasks',
+        name: 'completedTasks',
         columns: [
           {
             name: 'id',
@@ -23,12 +25,9 @@ export class CreateTableTasks1712864566576 implements MigrationInterface {
             type: 'timestamp',
           },
           {
-            name: 'isChecked',
-            type: 'boolean',
-          },
-          {
-            name: 'taskSeedId',
+            name: 'taskId',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'createdAt',
@@ -50,23 +49,23 @@ export class CreateTableTasks1712864566576 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'tasks',
+      'completedTasks',
       new TableForeignKey({
-        columnNames: ['taskSeedId'],
+        columnNames: ['taskId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'taskSeeds',
-        onDelete: 'CASCADE',
+        referencedTableName: 'tasks',
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
-        name: 'FK_tasks_taskSeedId_taskSeeds_id',
+        name: 'FK_completedTasks_taskId_tasks_id',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey(
-      'tasks',
-      'FK_tasks_taskSeedId_taskSeeds_id',
+      'completedTasks',
+      'FK_completedTasks_taskId_tasks_id',
     );
-    await queryRunner.dropTable('tasks');
+    await queryRunner.dropTable('completedTasks');
   }
 }

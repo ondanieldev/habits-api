@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -5,11 +6,15 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-import { TaskSeedTypeormEntity } from './task-seed-typeorm.entity';
+import { UserTypeormEntity } from 'modules/user/entities/user-typeorm.entity';
+
+import { TaskKind, taskKinds } from '../enums/task.enum';
+import { CompletedTaskTypeormEntity } from './completed-task-typeorm.entity';
 import { TaskEntity } from './task.entity';
 
 @Entity('tasks')
@@ -17,25 +22,38 @@ export class TaskTypeormEntity implements TaskEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column('timestamp')
-  date: Date;
+  @Transform(({ value }) => value.split(',').map(Number))
+  @Column('varchar')
+  daysOfWeek: string;
 
   @DeleteDateColumn()
   deletedAt: Date | null;
 
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
-  @Column('boolean')
-  isChecked: boolean;
+  @Column('enum', { enum: taskKinds })
+  kind: TaskKind;
 
-  @Column('uuid')
-  taskSeedId: string;
+  @Column('varchar')
+  name: string;
+
+  @Column('int')
+  startsAtSecond: number;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => TaskSeedTypeormEntity, (taskSeed) => taskSeed.tasks)
-  @JoinColumn({ name: 'taskSeedId' })
-  taskSeed?: TaskSeedTypeormEntity;
+  @Column('uuid')
+  userId: string;
+
+  @ManyToOne(() => UserTypeormEntity, (user) => user.tasks)
+  @JoinColumn({ name: 'userId' })
+  user?: UserTypeormEntity;
+
+  @OneToMany(
+    () => CompletedTaskTypeormEntity,
+    (completedTask) => completedTask.task,
+  )
+  completedTasks?: CompletedTaskTypeormEntity[];
 }

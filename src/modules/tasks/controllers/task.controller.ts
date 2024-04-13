@@ -16,22 +16,19 @@ import { OffsetPaginationDto } from 'common/dtos/offset-pagination.dto';
 import { AuthUserBo } from 'modules/auth/bos/auth.bo';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 
-import { CreateTaskSeedDto } from '../dtos/task-seed.dto';
-import { TaskSeedService } from '../services/task-seed.service';
+import { CreateTaskDto } from '../dtos/task.dto';
+import { TaskService } from '../services/task.service';
 
 @Injectable()
-@ApiTags('Task Seed')
-@Controller('tasks/seeds')
-export class TaskSeedController {
-  constructor(private taskSeedService: TaskSeedService) {}
+@ApiTags('Tasks')
+@Controller('tasks')
+export class TaskController {
+  constructor(private taskService: TaskService) {}
 
   @ApiBearerAuth()
   @Post()
-  async create(
-    @CurrentUser() user: AuthUserBo,
-    @Body() data: CreateTaskSeedDto,
-  ) {
-    return this.taskSeedService.create({ ...data, userId: user.sub });
+  async create(@CurrentUser() user: AuthUserBo, @Body() data: CreateTaskDto) {
+    return this.taskService.create({ ...data, userId: user.sub });
   }
 
   @ApiBearerAuth()
@@ -40,7 +37,7 @@ export class TaskSeedController {
     @CurrentUser() user: AuthUserBo,
     @Query() query: OffsetPaginationDto,
   ) {
-    return this.taskSeedService.readList({
+    return this.taskService.readList({
       data: {},
       userId: user.sub,
       pagination: query,
@@ -53,9 +50,9 @@ export class TaskSeedController {
   async update(
     @CurrentUser() user: AuthUserBo,
     @Param('id') id: string,
-    @Body() data: CreateTaskSeedDto,
+    @Body() data: CreateTaskDto,
   ) {
-    return this.taskSeedService.update({
+    return this.taskService.update({
       data: { ...data, userId: user.sub },
       id,
     });
@@ -64,6 +61,6 @@ export class TaskSeedController {
   @ApiBearerAuth()
   @Delete(':id')
   async delete(@CurrentUser() user: AuthUserBo, @Param('id') id: string) {
-    return this.taskSeedService.delete({ id, userId: user.sub });
+    return this.taskService.delete({ id, userId: user.sub });
   }
 }

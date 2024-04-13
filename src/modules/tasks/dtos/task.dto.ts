@@ -1,15 +1,17 @@
+import { Transform } from 'class-transformer';
 import { ArrayMinSize, IsIn, IsInt, IsString, Max, Min } from 'class-validator';
 
-import { CreateTaskSeedBo } from '../bos/task-seed.bo';
+import { CreateTaskBo } from '../bos/task.bo';
 import { TaskKind, taskKinds } from '../enums/task.enum';
 
-export class CreateTaskSeedDto
-  implements Omit<CreateTaskSeedBo, 'daysOfWeek' | 'userId'>
+export class CreateTaskDto
+  implements Omit<CreateTaskBo, 'daysOfWeek' | 'userId'>
 {
   @IsInt({ each: true })
   @Min(1, { each: true })
   @Max(7, { each: true })
   @ArrayMinSize(1)
+  @Transform(({ value }) => [...new Set(value.map(Number))])
   daysOfWeek: number[];
 
   @IsString()

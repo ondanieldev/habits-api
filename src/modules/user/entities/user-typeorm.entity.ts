@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 import { BaseTypeormEntity } from 'common/entities/base-typeorm.entity';
 
-import { TaskSeedTypeormEntity } from 'modules/tasks/entities/task-seed-typeorm.entity';
+import { TaskTypeormEntity } from 'modules/tasks/entities/task-typeorm.entity';
 
 import { UserEntity } from './user.entity';
 
@@ -16,6 +16,6 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   @Column('varchar')
   password: string;
 
-  @OneToMany(() => TaskSeedTypeormEntity, (taskSeed) => taskSeed.user)
-  taskSeeds?: TaskSeedTypeormEntity[];
+  @OneToMany(() => TaskTypeormEntity, (task) => task.user)
+  tasks?: TaskTypeormEntity[];
 }

@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class CreateTableTaskSeeds1712862879275 implements MigrationInterface {
+export class CreateTableTasks1712862879275 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'taskSeeds',
+        name: 'tasks',
         columns: [
           {
             name: 'id',
@@ -60,23 +60,20 @@ export class CreateTableTaskSeeds1712862879275 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'taskSeeds',
+      'tasks',
       new TableForeignKey({
         columnNames: ['userId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        name: 'FK_taskSeeds_userId_users_id',
+        name: 'FK_tasks_userId_users_id',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey(
-      'taskSeeds',
-      'FK_taskSeeds_userId_users_id',
-    );
-    await queryRunner.dropTable('taskSeeds');
+    await queryRunner.dropForeignKey('tasks', 'FK_tasks_userId_users_id');
+    await queryRunner.dropTable('tasks');
   }
 }

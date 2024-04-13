@@ -4,10 +4,10 @@ import { UserEntity } from 'modules/user/entities/user.entity';
 
 import { TaskKind } from '../enums/task.enum';
 
-export const taskSeedRelations = ['user'] as const;
-export type TaskSeedRelation = (typeof taskSeedRelations)[number];
+export const taskRelations = ['user'] as const;
+export type TaskRelation = (typeof taskRelations)[number];
 
-export class TaskSeedEntity extends BaseEntity {
+export class TaskEntity extends BaseEntity {
   kind: TaskKind;
   name: string;
   startsAtSecond: number;

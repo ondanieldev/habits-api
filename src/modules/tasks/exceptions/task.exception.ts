@@ -1,12 +1,12 @@
 import { BadRequestException, ForbiddenException } from '@nestjs/common';
 
-export class TaskSeedNotFoundException extends BadRequestException {
+export class TaskNotFoundException extends BadRequestException {
   constructor() {
-    super('Task Seed not found.');
+    super('Task not found.');
   }
 }
 
-export class TaskSeedUserForbiddenException extends ForbiddenException {
+export class TaskUserForbiddenException extends ForbiddenException {
   constructor() {
     super('You are not allowed to perform this action.');
   }
