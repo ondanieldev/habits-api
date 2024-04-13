@@ -1,6 +1,8 @@
 import { Transform } from 'class-transformer';
 import { ArrayMinSize, IsIn, IsInt, IsString, Max, Min } from 'class-validator';
 
+import { ToLowerCase } from 'modules/auth/decorators/to-lower-case.decorator';
+
 import { CreateTaskBo } from '../bos/task.bo';
 import { IsHour } from '../decorators/is-hour.decorator';
 import { IsMinute } from '../decorators/is-minute.decorator';
@@ -18,9 +20,11 @@ export class CreateTaskDto
 
   @IsString()
   @IsIn(taskKinds)
+  @ToLowerCase()
   kind: TaskKind;
 
   @IsString()
+  @ToLowerCase()
   name: string;
 
   @IsHour()
