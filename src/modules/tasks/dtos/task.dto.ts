@@ -2,6 +2,8 @@ import { Transform } from 'class-transformer';
 import { ArrayMinSize, IsIn, IsInt, IsString, Max, Min } from 'class-validator';
 
 import { CreateTaskBo } from '../bos/task.bo';
+import { IsHour } from '../decorators/is-hour.decorator';
+import { IsMinute } from '../decorators/is-minute.decorator';
 import { TaskKind, taskKinds } from '../enums/task.enum';
 
 export class CreateTaskDto
@@ -21,8 +23,9 @@ export class CreateTaskDto
   @IsString()
   name: string;
 
-  @IsInt()
-  @Min(0)
-  @Max(86399)
-  startsAtSecond: number;
+  @IsHour()
+  hours: number;
+
+  @IsMinute()
+  minutes: number;
 }

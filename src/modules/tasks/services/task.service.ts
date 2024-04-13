@@ -17,17 +17,11 @@ export class TaskService {
 
   async create({
     daysOfWeek,
-    kind,
-    name,
-    startsAtSecond,
-    userId,
+    ...data
   }: Omit<CreateTaskBo, 'daysOfWeek'> & { daysOfWeek: number[] }) {
     return this.taskRepository.create({
       daysOfWeek: daysOfWeek.join(','),
-      startsAtSecond,
-      kind,
-      name,
-      userId,
+      ...data,
     });
   }
 
@@ -51,7 +45,7 @@ export class TaskService {
 
   async update({
     id,
-    data: { daysOfWeek, kind, name, startsAtSecond, userId },
+    data: { daysOfWeek, userId, ...data },
   }: {
     id: string;
     data: Omit<CreateTaskBo, 'daysOfWeek'> & { daysOfWeek: number[] };
@@ -62,10 +56,7 @@ export class TaskService {
     Object.assign(task, {
       id,
       daysOfWeek: daysOfWeek.join(','),
-      startsAtSecond,
-      kind,
-      name,
-      userId,
+      ...data,
     });
 
     return this.taskRepository.save(task);

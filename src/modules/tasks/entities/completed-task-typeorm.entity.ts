@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -14,12 +15,20 @@ import { TaskTypeormEntity } from './task-typeorm.entity';
 
 @Entity('completedTasks')
 export class CompletedTaskTypeormEntity implements CompletedTaskEntity {
+  @Exclude()
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column('timestamp')
-  date: Date;
+  @Column('int')
+  day: number;
 
+  @Column('int')
+  month: number;
+
+  @Column('int')
+  year: number;
+
+  @Exclude()
   @DeleteDateColumn()
   deletedAt: Date | null;
 
@@ -29,10 +38,13 @@ export class CompletedTaskTypeormEntity implements CompletedTaskEntity {
   @Column('uuid')
   taskId: string;
 
+  @Exclude()
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => TaskTypeormEntity, (task) => task.completedTasks)
+  @ManyToOne(() => TaskTypeormEntity, (task) => task.completedTasks, {
+    eager: true,
+  })
   @JoinColumn({ name: 'taskId' })
-  task?: TaskTypeormEntity;
+  task: TaskTypeormEntity;
 }

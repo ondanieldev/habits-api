@@ -1,4 +1,4 @@
-import { Transform } from 'class-transformer';
+import { Exclude, Transform } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -19,6 +19,7 @@ import { TaskEntity } from './task.entity';
 
 @Entity('tasks')
 export class TaskTypeormEntity implements TaskEntity {
+  @Exclude()
   @CreateDateColumn()
   createdAt: Date;
 
@@ -26,6 +27,7 @@ export class TaskTypeormEntity implements TaskEntity {
   @Column('varchar')
   daysOfWeek: string;
 
+  @Exclude()
   @DeleteDateColumn()
   deletedAt: Date | null;
 
@@ -39,8 +41,12 @@ export class TaskTypeormEntity implements TaskEntity {
   name: string;
 
   @Column('int')
-  startsAtSecond: number;
+  hours: number;
 
+  @Column('int')
+  minutes: number;
+
+  @Exclude()
   @UpdateDateColumn()
   updatedAt: Date;
 

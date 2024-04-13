@@ -21,8 +21,16 @@ export class CreateTableCompletedTasks1712864566576
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'date',
-            type: 'timestamp',
+            name: 'day',
+            type: 'int',
+          },
+          {
+            name: 'month',
+            type: 'int',
+          },
+          {
+            name: 'year',
+            type: 'int',
           },
           {
             name: 'taskId',
@@ -54,7 +62,7 @@ export class CreateTableCompletedTasks1712864566576
         columnNames: ['taskId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'tasks',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
         name: 'FK_completedTasks_taskId_tasks_id',
       }),

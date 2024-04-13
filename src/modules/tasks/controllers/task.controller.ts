@@ -41,7 +41,7 @@ export class TaskController {
       data: {},
       userId: user.sub,
       pagination: query,
-      order: { startsAtSecond: 'ASC' },
+      order: { hours: 'ASC', minutes: 'ASC' },
     });
   }
 

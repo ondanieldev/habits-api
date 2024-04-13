@@ -10,7 +10,8 @@ export type TaskRelation = (typeof taskRelations)[number];
 export class TaskEntity extends BaseEntity {
   kind: TaskKind;
   name: string;
-  startsAtSecond: number;
+  hours: number;
+  minutes: number;
   daysOfWeek: string;
   userId: string;
   user?: UserEntity;

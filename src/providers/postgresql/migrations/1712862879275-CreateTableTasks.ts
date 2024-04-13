@@ -29,7 +29,11 @@ export class CreateTableTasks1712862879275 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'startsAtSecond',
+            name: 'hours',
+            type: 'int',
+          },
+          {
+            name: 'minutes',
             type: 'int',
           },
           {

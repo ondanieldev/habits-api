@@ -6,7 +6,9 @@ export const completedTaskRelations = ['task'] as const;
 export type CompletedTaskRelation = (typeof completedTaskRelations)[number];
 
 export class CompletedTaskEntity extends BaseEntity {
-  date: Date;
+  day: number;
+  month: number;
+  year: number;
   taskId: string;
-  task?: TaskEntity;
+  task: TaskEntity;
 }
