@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Injectable,
   Param,
   Post,
   Query,
@@ -19,7 +18,6 @@ import {
 } from '../dtos/completed-task.dto';
 import { CompletedTaskService } from '../services/completed-task.service';
 
-@Injectable()
 @ApiTags('Completed Tasks')
 @Controller('tasks/completed')
 export class CompletedTaskController {
@@ -44,9 +42,10 @@ export class CompletedTaskController {
     @Query() { limit, page, ...data }: ReadCompletedTaskDto,
   ) {
     return this.completedTaskService.readList({
-      data: { ...data, task: { userId: user.sub } },
-      pagination: { limit, page },
+      data,
       order: { year: 'ASC', month: 'ASC', day: 'ASC' },
+      pagination: { limit, page },
+      userId: user.sub,
     });
   }
 

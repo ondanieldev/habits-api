@@ -56,13 +56,20 @@ export class CompletedTaskService {
     data,
     order,
     pagination,
+    userId,
   }: {
     data: ReadCompletedTaskBo;
     order: OrderBo<CompletedTaskEntity>;
     pagination: OffsetPaginationBo;
+    userId: string;
   }) {
     return this.completedTaskRepository.findMany({
-      data,
+      data: {
+        ...data,
+        task: {
+          userId,
+        },
+      },
       order,
       pagination,
     });

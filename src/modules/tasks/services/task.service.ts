@@ -31,7 +31,7 @@ export class TaskService {
     pagination,
     order,
   }: {
-    data: Partial<TaskEntity>;
+    data: Omit<Partial<TaskEntity>, 'userId'>;
     userId: string;
     pagination: OffsetPaginationBo;
     order?: OrderBo<TaskEntity>;
@@ -45,10 +45,14 @@ export class TaskService {
 
   async update({
     id,
-    data: { daysOfWeek, userId, ...data },
+    data: { daysOfWeek, ...data },
+    userId,
   }: {
     id: string;
-    data: Omit<CreateTaskBo, 'daysOfWeek'> & { daysOfWeek: number[] };
+    data: Omit<CreateTaskBo, 'daysOfWeek' | 'userId'> & {
+      daysOfWeek: number[];
+    };
+    userId: string;
   }) {
     const task = await this.assertService.assertExists(id);
     await this.assertService.assertUserOwnership(task, userId);

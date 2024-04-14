@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Injectable,
   Param,
   Post,
   Put,
@@ -19,7 +18,6 @@ import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { CreateTaskDto } from '../dtos/task.dto';
 import { TaskService } from '../services/task.service';
 
-@Injectable()
 @ApiTags('Tasks')
 @Controller('tasks')
 export class TaskController {
@@ -53,8 +51,9 @@ export class TaskController {
     @Body() data: CreateTaskDto,
   ) {
     return this.taskService.update({
-      data: { ...data, userId: user.sub },
+      data,
       id,
+      userId: user.sub,
     });
   }
 
