@@ -21,7 +21,7 @@ export class CreateTableTasks1712862879275 implements MigrationInterface {
           {
             name: 'kind',
             type: 'enum',
-            enum: ['habit', 'event', 'reminder'],
+            enum: ['habit', 'reminder'],
             enumName: 'taskseeds_kind_enum',
           },
           {
