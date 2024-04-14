@@ -16,14 +16,14 @@ export class TaskAssertService {
       data: { id },
     });
     if (!task) {
-      throw new TaskNotFoundException();
+      throw new TaskNotFoundException(id);
     }
     return task;
   }
 
   async assertUserOwnership(task: TaskEntity, userId: string) {
     if (task.userId !== userId) {
-      throw new TaskUserForbiddenException();
+      throw new TaskUserForbiddenException(task.id, userId);
     }
   }
 }

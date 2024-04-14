@@ -1,13 +1,13 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 
-export class UserNotFoundException extends HttpException {
-  constructor() {
-    super('User not found', HttpStatus.NOT_FOUND);
+export class UserNotFoundException extends NotFoundException {
+  constructor(id?: string) {
+    super(`User ${id || ''} not found`);
   }
 }
 
-export class UserConflictException extends HttpException {
-  constructor() {
-    super('User email already in use', HttpStatus.CONFLICT);
+export class UserEmailConflictException extends ConflictException {
+  constructor(email?: string) {
+    super(`Email ${email || ''} is already in use`);
   }
 }

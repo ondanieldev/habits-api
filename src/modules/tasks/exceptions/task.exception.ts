@@ -1,13 +1,13 @@
 import { BadRequestException, ForbiddenException } from '@nestjs/common';
 
 export class TaskNotFoundException extends BadRequestException {
-  constructor() {
-    super('Task not found.');
+  constructor(id?: string) {
+    super(`Task ${id || ''} not found`);
   }
 }
 
 export class TaskUserForbiddenException extends ForbiddenException {
-  constructor() {
-    super('You are not allowed to perform this action.');
+  constructor(id?: string, userId?: string) {
+    super(`User ${userId || ''} is not allowed to manage task ${id || ''}`);
   }
 }

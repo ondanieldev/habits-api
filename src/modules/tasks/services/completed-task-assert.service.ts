@@ -20,7 +20,7 @@ export class CompletedTaskAssertService {
     });
 
     if (!completedTask) {
-      throw new CompletedTaskNotFoundException();
+      throw new CompletedTaskNotFoundException(id);
     }
 
     return completedTask;
@@ -37,7 +37,11 @@ export class CompletedTaskAssertService {
     });
 
     if (completedTask) {
-      throw new CompletedTaskAlreadyExistsException();
+      throw new CompletedTaskAlreadyExistsException(taskId, {
+        day,
+        month,
+        year,
+      });
     }
 
     return completedTask;
@@ -62,7 +66,7 @@ export class CompletedTaskAssertService {
       testDate.getFullYear() !== year ||
       !daysOfWeek.includes(testDate.getDay() + 1)
     ) {
-      throw new CompletedTaskDateException();
+      throw new CompletedTaskDateException({ day, month, year }, daysOfWeek);
     }
   }
 }

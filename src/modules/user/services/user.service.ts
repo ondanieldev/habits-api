@@ -12,7 +12,7 @@ import { HashService } from 'providers/hash/services/hash.service';
 import { CreateUserBo } from '../bos/user.bo';
 import { UserEntity } from '../entities/user.entity';
 import {
-  UserConflictException,
+  UserEmailConflictException,
   UserNotFoundException,
 } from '../exceptions/user.exception';
 import { UserRepository } from '../repositories/user.repository';
@@ -47,7 +47,7 @@ export class UserService implements OnModuleInit {
       },
     });
     if (user) {
-      throw new UserConflictException();
+      throw new UserEmailConflictException(email);
     }
     user = await this.userRepository.create({
       ...rest,
@@ -62,7 +62,7 @@ export class UserService implements OnModuleInit {
       data,
     });
     if (!user) {
-      throw new UserNotFoundException();
+      throw new UserNotFoundException(data.id || data.email);
     }
     return user;
   }

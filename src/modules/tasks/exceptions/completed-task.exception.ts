@@ -5,19 +5,29 @@ import {
 } from '@nestjs/common';
 
 export class CompletedTaskDateException extends BadRequestException {
-  constructor() {
-    super('Date is not in the task days of week.');
+  constructor(
+    date?: { day: number; month: number; year: number },
+    daysOfWeek?: number[],
+  ) {
+    super(
+      `Date ${date ? `${date.month}/${date.day}/${date.year}` : ''} is not in the task days of week ${daysOfWeek ? `(${daysOfWeek.join(' or ')})` : ''}`,
+    );
   }
 }
 
 export class CompletedTaskNotFoundException extends NotFoundException {
-  constructor() {
-    super('Completed task not found.');
+  constructor(id?: string) {
+    super(`Completed task ${id || ''} not found`);
   }
 }
 
 export class CompletedTaskAlreadyExistsException extends ConflictException {
-  constructor() {
-    super('Task already completed on this day.');
+  constructor(
+    id?: string,
+    date?: { day: number; month: number; year: number },
+  ) {
+    super(
+      `Task ${id} is already completed on day ${date ? `${date.month}/${date.day}/${date.year}` : ''}`,
+    );
   }
 }
