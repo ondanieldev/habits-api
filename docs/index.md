@@ -31,3 +31,8 @@
 - [Habits API](https://habits-api.ondaniel.com.br)
 - [Habits API Insomnia](https://github.com/ondanieldev/habits-api-insomnia)
 - [Habits API Swagger](https://habits-api.ondaniel.com.br/api)
+
+## Roadmap
+
+- Create cron to delete dangling completed tasks that does not match task.dayOfWeek anymore
+- Avoid creating completed tasks more than two days ahead from today
