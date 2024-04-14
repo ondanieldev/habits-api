@@ -22,7 +22,7 @@ export class CreateTableTasks1712862879275 implements MigrationInterface {
             name: 'kind',
             type: 'enum',
             enum: ['habit', 'reminder'],
-            enumName: 'taskseeds_kind_enum',
+            enumName: 'tasks_kind_enum',
           },
           {
             name: 'name',
@@ -79,5 +79,6 @@ export class CreateTableTasks1712862879275 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('tasks', 'FK_tasks_userId_users_id');
     await queryRunner.dropTable('tasks');
+    await queryRunner.query('DROP TYPE tasks_kind_enum');
   }
 }
