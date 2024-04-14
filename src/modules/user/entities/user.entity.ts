@@ -1,5 +1,6 @@
 import { BaseEntity } from 'common/entities/base.entity';
 
+import { AppointmentEntity } from 'modules/appointment/entities/appointment.entity';
 import { TaskEntity } from 'modules/tasks/entities/task.entity';
 
 export const userRelations = ['tasks'] as const;
@@ -9,4 +10,5 @@ export class UserEntity extends BaseEntity {
   email: string;
   password: string;
   tasks?: TaskEntity[];
+  appointments?: AppointmentEntity[];
 }

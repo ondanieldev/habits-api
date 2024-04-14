@@ -3,6 +3,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 import { BaseTypeormEntity } from 'common/entities/base-typeorm.entity';
 
+import { AppointmentTypeormEntity } from 'modules/appointment/entities/appointment-typeorm.entity';
 import { TaskTypeormEntity } from 'modules/tasks/entities/task-typeorm.entity';
 
 import { UserEntity } from './user.entity';
@@ -18,4 +19,7 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
 
   @OneToMany(() => TaskTypeormEntity, (task) => task.user)
   tasks?: TaskTypeormEntity[];
+
+  @OneToMany(() => AppointmentTypeormEntity, (appointment) => appointment.user)
+  appointments?: AppointmentTypeormEntity[];
 }

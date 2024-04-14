@@ -1,6 +1,7 @@
 import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
+import { AppointmentModule } from 'modules/appointment/appointment.module';
 import { TaskModule } from 'modules/tasks/task.module';
 
 import { CacheModule } from 'providers/cache/cache.module';
@@ -15,6 +16,7 @@ import { UserModule } from '../user/user.module';
 @Module({
   imports: [
     AuthModule,
+    AppointmentModule,
     CacheModule,
     HashModule,
     PostgresqlModule,
