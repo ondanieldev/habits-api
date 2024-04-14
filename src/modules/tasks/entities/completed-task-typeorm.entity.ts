@@ -1,24 +1,15 @@
-import { Exclude } from 'class-transformer';
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+
+import { BaseTypeormEntity } from 'common/entities/base-typeorm.entity';
 
 import { CompletedTaskEntity } from './completed-task.entity';
 import { TaskTypeormEntity } from './task-typeorm.entity';
 
 @Entity('completedTasks')
-export class CompletedTaskTypeormEntity implements CompletedTaskEntity {
-  @Exclude()
-  @CreateDateColumn()
-  createdAt: Date;
-
+export class CompletedTaskTypeormEntity
+  extends BaseTypeormEntity
+  implements CompletedTaskEntity
+{
   @Column('int')
   day: number;
 
@@ -28,19 +19,8 @@ export class CompletedTaskTypeormEntity implements CompletedTaskEntity {
   @Column('int')
   year: number;
 
-  @Exclude()
-  @DeleteDateColumn()
-  deletedAt: Date | null;
-
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @Column('uuid')
   taskId: string;
-
-  @Exclude()
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @ManyToOne(() => TaskTypeormEntity, (task) => task.completedTasks, {
     eager: true,

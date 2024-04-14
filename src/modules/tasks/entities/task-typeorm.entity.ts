@@ -1,15 +1,7 @@
-import { Exclude, Transform } from 'class-transformer';
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Transform } from 'class-transformer';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+
+import { BaseTypeormEntity } from 'common/entities/base-typeorm.entity';
 
 import { UserTypeormEntity } from 'modules/user/entities/user-typeorm.entity';
 
@@ -18,21 +10,10 @@ import { CompletedTaskTypeormEntity } from './completed-task-typeorm.entity';
 import { TaskEntity } from './task.entity';
 
 @Entity('tasks')
-export class TaskTypeormEntity implements TaskEntity {
-  @Exclude()
-  @CreateDateColumn()
-  createdAt: Date;
-
+export class TaskTypeormEntity extends BaseTypeormEntity implements TaskEntity {
   @Transform(({ value }) => value.split(',').map(Number))
   @Column('varchar')
   daysOfWeek: string;
-
-  @Exclude()
-  @DeleteDateColumn()
-  deletedAt: Date | null;
-
-  @PrimaryGeneratedColumn()
-  id: string;
 
   @Column('enum', { enum: taskKinds })
   kind: TaskKind;
@@ -45,10 +26,6 @@ export class TaskTypeormEntity implements TaskEntity {
 
   @Column('int')
   minutes: number;
-
-  @Exclude()
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @Column('uuid')
   userId: string;
