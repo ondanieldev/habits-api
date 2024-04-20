@@ -33,6 +33,7 @@ jobs:
           target: '~/habits-api'
           overwrite: true
           rm: true
+          timeout: 300s
 
       - name: Run production scripts
         uses: appleboy/ssh-action@master
