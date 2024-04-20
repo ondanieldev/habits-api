@@ -17,6 +17,10 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   @Column('varchar')
   password: string;
 
+  @Exclude()
+  @Column('varchar')
+  accessToken?: string | null;
+
   @OneToMany(() => TaskTypeormEntity, (task) => task.user)
   tasks?: TaskTypeormEntity[];
 

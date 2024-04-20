@@ -9,6 +9,7 @@ export type UserRelation = (typeof userRelations)[number];
 export class UserEntity extends BaseEntity {
   email: string;
   password: string;
+  accessToken?: string | null;
   tasks?: TaskEntity[];
   appointments?: AppointmentEntity[];
 }
