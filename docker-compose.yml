@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  api:
+    container_name: habits-api
+    image: ondanieldev/habits-api:latest 
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - postgresql
+      - redis
+    restart: unless-stopped
+
   postgresql:
     container_name: habits-api_postgresql
     image: bitnami/postgresql:15.1.0
@@ -12,6 +22,7 @@ services:
       - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    restart: unless-stopped
 
   redis:
     container_name: habits-api_redis
@@ -20,6 +31,7 @@ services:
       - ${REDIS_PORT_LOCAL}:${REDIS_PORT_DOCKER}
     command: >
       --requirepass ${REDIS_PASSWORD}
+    restart: unless-stopped
 
 volumes:
   habits-api_postgresql_volume:
