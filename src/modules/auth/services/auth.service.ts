@@ -8,6 +8,7 @@ import { UserService } from 'modules/user/services/user.service';
 import { HashService } from 'providers/hash/services/hash.service';
 
 import { AuthSignInBo } from '../bos/auth.bo';
+import { AuthToken } from '../entities/AuthToken';
 
 @Injectable()
 export class AuthService {
@@ -17,10 +18,17 @@ export class AuthService {
     private usersService: UserService,
   ) {}
 
-  async signIn({
-    email,
-    password,
-  }: AuthSignInBo): Promise<{ accessToken: string }> {
+  private async generateAuthToken(user: UserEntity): Promise<AuthToken> {
+    const accessToken = await this.jwtService.signAsync({
+      sub: user.id,
+      email: user.email,
+    });
+    return {
+      accessToken,
+    };
+  }
+
+  async signIn({ email, password }: AuthSignInBo): Promise<AuthToken> {
     const user = await this.usersService.read({
       email,
     });
@@ -33,15 +41,25 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    const payload = { sub: user.id, email: user.email };
-    const accessToken = await this.jwtService.signAsync(payload);
+    const authToken = await this.generateAuthToken(user);
+    Object.assign(user, authToken);
 
-    return {
-      accessToken,
-    };
+    await this.usersService.save(user);
+
+    return authToken;
   }
 
   async signUp(data: CreateUserBo): Promise<UserEntity> {
     return this.usersService.create(data);
+  }
+
+  async signOut(userId: string): Promise<void> {
+    const user = await this.usersService.read({
+      id: userId,
+    });
+
+    user.accessToken = null;
+
+    await this.usersService.save(user);
   }
 }

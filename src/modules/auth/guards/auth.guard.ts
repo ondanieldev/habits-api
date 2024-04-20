@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
 import { IS_PUBLIC_ROUTE_KEY } from 'modules/auth/decorators/is-public-route.decorator';
+import { UserService } from 'modules/user/services/user.service';
 
 import { jwtConstants } from '../constants/auth.constant';
 
@@ -17,6 +18,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private reflector: Reflector,
+    private userService: UserService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -34,10 +36,17 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException();
     }
+
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });
+
+      const user = await this.userService.read({ id: payload.sub });
+      if (user.accessToken !== token) {
+        throw new Error();
+      }
+
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();

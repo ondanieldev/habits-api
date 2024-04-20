@@ -26,10 +26,17 @@ export class UserService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
+    const email = process.env.INITIAL_USER_EMAIL;
+    const password = process.env.INITIAL_USER_PASSWORD;
+
+    if (!email || !password) {
+      throw new Error('Initial user email or password not set');
+    }
+
     try {
       await this.create({
-        email: 'test@test.com',
-        password: '123456',
+        email,
+        password,
       });
     } catch {
       //
@@ -89,5 +96,9 @@ export class UserService implements OnModuleInit {
     }
 
     return users;
+  }
+
+  public async save(user: UserEntity): Promise<UserEntity> {
+    return this.userRepository.save(user);
   }
 }

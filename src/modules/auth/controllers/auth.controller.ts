@@ -25,6 +25,12 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
+  @Post('sign-out')
+  signOut(@CurrentUser() user: AuthUserBo) {
+    return this.authService.signOut(user.sub);
+  }
+
+  @ApiBearerAuth()
   @Get('profile')
   readProfile(@CurrentUser() user: AuthUserBo) {
     return user;
