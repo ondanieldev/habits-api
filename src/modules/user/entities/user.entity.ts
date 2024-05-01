@@ -10,6 +10,8 @@ export class UserEntity extends BaseEntity {
   email: string;
   password: string;
   accessToken?: string | null;
+  isSoundEnabled: boolean;
+  isVibrationEnabled: boolean;
   tasks?: TaskEntity[];
   appointments?: AppointmentEntity[];
 }
