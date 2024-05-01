@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UnauthorizedException } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { ReadAllUsersDto } from '../dtos/user.dto';
@@ -11,7 +11,8 @@ export class UserController {
 
   @ApiBearerAuth()
   @Get('/')
-  readUsers(@Query() dto: ReadAllUsersDto) {
-    return this.userService.readAll(dto);
+  readUsers(@Query() _dto: ReadAllUsersDto) {
+    // TODO: create roles to allow only admins to retrieve user list
+    throw new UnauthorizedException();
   }
 }
