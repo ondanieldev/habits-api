@@ -27,6 +27,15 @@ export class TaskTypeormEntity extends BaseTypeormEntity implements TaskEntity {
   @Column('int')
   minutes: number;
 
+  @Column('boolean', { default: false })
+  isNotificationEnabled: boolean;
+
+  @Column('boolean', { default: false })
+  isSoundEnabled: boolean;
+
+  @Column('boolean', { default: false })
+  isVibrationEnabled: boolean;
+
   @Column('uuid')
   userId: string;
 

@@ -12,6 +12,15 @@ export class CreateAppointmentDto
 
   @IsString()
   name: string;
+
+  @IsBoolean()
+  isNotificationEnabled: boolean;
+
+  @IsBoolean()
+  isSoundEnabled: boolean;
+
+  @IsBoolean()
+  isVibrationEnabled: boolean;
 }
 
 export class UpdateAppointmentDto extends CreateAppointmentDto {

@@ -11,6 +11,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { UserEntity } from 'modules/user/entities/user.entity';
 
 import {
   CreateAppointmentDto,
@@ -18,7 +19,6 @@ import {
   UpdateAppointmentDto,
 } from '../dtos/appointment.dto';
 import { AppointmentService } from '../services/appointment.service';
-import { UserEntity } from 'modules/user/entities/user.entity';
 
 @ApiTags('Appointments')
 @Controller('appointments')

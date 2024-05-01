@@ -15,8 +15,8 @@ export class AppointmentService {
     private readonly appointmentRepository: AppointmentRepository,
   ) {}
 
-  async create({ date, name, userId }: CreateAppointmentBo) {
-    return this.appointmentRepository.create({ date, name, userId });
+  async create(data: CreateAppointmentBo) {
+    return this.appointmentRepository.create(data);
   }
 
   async readList({
