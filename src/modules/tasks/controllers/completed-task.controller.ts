@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { AuthUserBo } from 'modules/auth/bos/auth.bo';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { UserEntity } from 'modules/user/entities/user.entity';
 
 import {
   CreateCompletedTaskDto,
@@ -26,32 +26,32 @@ export class CompletedTaskController {
   @ApiBearerAuth()
   @Post()
   async create(
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
     @Body() data: CreateCompletedTaskDto,
   ) {
     return this.completedTaskService.create({
       data,
-      userId: user.sub,
+      userId: user.id,
     });
   }
 
   @ApiBearerAuth()
   @Get()
   async readList(
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
     @Query() { limit, page, ...data }: ReadCompletedTaskDto,
   ) {
     return this.completedTaskService.readList({
       data,
       order: { year: 'ASC', month: 'ASC', day: 'ASC' },
       pagination: { limit, page },
-      userId: user.sub,
+      userId: user.id,
     });
   }
 
   @ApiBearerAuth()
   @Delete(':id')
-  async delete(@CurrentUser() user: AuthUserBo, @Param('id') id: string) {
-    return this.completedTaskService.delete({ id, userId: user.sub });
+  async delete(@CurrentUser() user: UserEntity, @Param('id') id: string) {
+    return this.completedTaskService.delete({ id, userId: user.id });
   }
 }

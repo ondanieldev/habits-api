@@ -12,8 +12,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { OffsetPaginationDto } from 'common/dtos/offset-pagination.dto';
 
-import { AuthUserBo } from 'modules/auth/bos/auth.bo';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { UserEntity } from 'modules/user/entities/user.entity';
 
 import { CreateTaskDto } from '../dtos/task.dto';
 import { TaskService } from '../services/task.service';
@@ -25,19 +25,19 @@ export class TaskController {
 
   @ApiBearerAuth()
   @Post()
-  async create(@CurrentUser() user: AuthUserBo, @Body() data: CreateTaskDto) {
-    return this.taskService.create({ ...data, userId: user.sub });
+  async create(@CurrentUser() user: UserEntity, @Body() data: CreateTaskDto) {
+    return this.taskService.create({ ...data, userId: user.id });
   }
 
   @ApiBearerAuth()
   @Get()
   async readList(
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
     @Query() query: OffsetPaginationDto,
   ) {
     return this.taskService.readList({
       data: {},
-      userId: user.sub,
+      userId: user.id,
       pagination: query,
       order: { hours: 'ASC', minutes: 'ASC' },
     });
@@ -46,20 +46,20 @@ export class TaskController {
   @ApiBearerAuth()
   @Put(':id')
   async update(
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
     @Param('id') id: string,
     @Body() data: CreateTaskDto,
   ) {
     return this.taskService.update({
       data,
       id,
-      userId: user.sub,
+      userId: user.id,
     });
   }
 
   @ApiBearerAuth()
   @Delete(':id')
-  async delete(@CurrentUser() user: AuthUserBo, @Param('id') id: string) {
-    return this.taskService.delete({ id, userId: user.sub });
+  async delete(@CurrentUser() user: UserEntity, @Param('id') id: string) {
+    return this.taskService.delete({ id, userId: user.id });
   }
 }

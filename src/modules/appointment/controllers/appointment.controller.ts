@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { AuthUserBo } from 'modules/auth/bos/auth.bo';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 
 import {
@@ -19,6 +18,7 @@ import {
   UpdateAppointmentDto,
 } from '../dtos/appointment.dto';
 import { AppointmentService } from '../services/appointment.service';
+import { UserEntity } from 'modules/user/entities/user.entity';
 
 @ApiTags('Appointments')
 @Controller('appointments')
@@ -28,10 +28,10 @@ export class AppointmentController {
   @Post()
   create(
     @Body() { date, ...rest }: CreateAppointmentDto,
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
   ) {
     return this.appointmentService.create({
-      userId: user.sub,
+      userId: user.id,
       date: new Date(date),
       ...rest,
     });
@@ -41,7 +41,7 @@ export class AppointmentController {
   readList(
     @Query()
     { limit, page, maxDate, minDate, ...rest }: ReadAppointmentDto,
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
   ) {
     return this.appointmentService.readList({
       data: {
@@ -49,7 +49,7 @@ export class AppointmentController {
         minDate: minDate ? new Date(minDate) : undefined,
         ...rest,
       },
-      userId: user.sub,
+      userId: user.id,
       order: { date: 'ASC' },
       pagination: { limit, page },
     });
@@ -59,7 +59,7 @@ export class AppointmentController {
   update(
     @Param('id') id: string,
     @Body() { date, ...rest }: UpdateAppointmentDto,
-    @CurrentUser() user: AuthUserBo,
+    @CurrentUser() user: UserEntity,
   ) {
     return this.appointmentService.update({
       data: {
@@ -67,15 +67,15 @@ export class AppointmentController {
         ...rest,
       },
       id,
-      userId: user.sub,
+      userId: user.id,
     });
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string, @CurrentUser() user: AuthUserBo) {
+  delete(@Param('id') id: string, @CurrentUser() user: UserEntity) {
     return this.appointmentService.delete({
       id,
-      userId: user.sub,
+      userId: user.id,
     });
   }
 }

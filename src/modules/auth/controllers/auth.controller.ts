@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { AuthUserBo } from '../bos/auth.bo';
+import { UserEntity } from 'modules/user/entities/user.entity';
+
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { PublicRoute } from '../decorators/is-public-route.decorator';
 import { AuthSignInDto, AuthSignUpDto } from '../dtos/auth.dto';
@@ -26,13 +27,13 @@ export class AuthController {
 
   @ApiBearerAuth()
   @Post('sign-out')
-  signOut(@CurrentUser() user: AuthUserBo) {
-    return this.authService.signOut(user.sub);
+  signOut(@CurrentUser() user: UserEntity) {
+    return this.authService.signOut(user.id);
   }
 
   @ApiBearerAuth()
   @Get('profile')
-  readProfile(@CurrentUser() user: AuthUserBo) {
+  readProfile(@CurrentUser() user: UserEntity) {
     return user;
   }
 }
