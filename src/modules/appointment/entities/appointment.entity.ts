@@ -6,6 +6,9 @@ export class AppointmentEntity extends BaseEntity {
   name: string;
   date: Date;
   isCompleted: boolean;
+  isNotificationEnabled: boolean;
+  isSoundEnabled: boolean;
+  isVibrationEnabled: boolean;
   userId: string;
   user?: UserEntity;
 }

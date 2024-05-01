@@ -11,6 +11,7 @@ import { Request } from 'express';
 import { IS_PUBLIC_ROUTE_KEY } from 'modules/auth/decorators/is-public-route.decorator';
 import { UserService } from 'modules/user/services/user.service';
 
+import { AuthUserBo } from '../bos/auth.bo';
 import { jwtConstants } from '../constants/auth.constant';
 
 @Injectable()
@@ -38,7 +39,7 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
+      const payload: AuthUserBo = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });
 
@@ -47,7 +48,7 @@ export class AuthGuard implements CanActivate {
         throw new Error();
       }
 
-      request['user'] = payload;
+      request['user'] = user;
     } catch {
       throw new UnauthorizedException();
     }

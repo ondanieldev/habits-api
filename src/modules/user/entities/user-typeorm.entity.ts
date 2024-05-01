@@ -21,6 +21,15 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   @Column('varchar')
   accessToken?: string | null;
 
+  @Column('boolean', { default: false })
+  isNotificationEnabled: boolean;
+
+  @Column('boolean', { default: false })
+  isSoundEnabled: boolean;
+
+  @Column('boolean', { default: false })
+  isVibrationEnabled: boolean;
+
   @OneToMany(() => TaskTypeormEntity, (task) => task.user)
   tasks?: TaskTypeormEntity[];
 
