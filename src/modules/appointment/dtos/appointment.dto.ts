@@ -2,6 +2,8 @@ import { IsBoolean, IsDateString, IsOptional, IsString } from 'class-validator';
 
 import { OffsetPaginationDto } from 'common/dtos/offset-pagination.dto';
 
+import { Trim } from 'modules/auth/decorators/trim.decorator';
+
 import { CreateAppointmentBo } from '../bos/appointment.bo';
 
 export class CreateAppointmentDto
@@ -11,6 +13,7 @@ export class CreateAppointmentDto
   date: string;
 
   @IsString()
+  @Trim()
   name: string;
 
   @IsBoolean()

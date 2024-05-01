@@ -10,6 +10,7 @@ import {
 } from 'class-validator';
 
 import { ToLowerCase } from 'modules/auth/decorators/to-lower-case.decorator';
+import { Trim } from 'modules/auth/decorators/trim.decorator';
 
 import { CreateTaskBo } from '../bos/task.bo';
 import { IsHour } from '../decorators/is-hour.decorator';
@@ -32,7 +33,7 @@ export class CreateTaskDto
   kind: TaskKind;
 
   @IsString()
-  @ToLowerCase()
+  @Trim()
   name: string;
 
   @IsHour()
