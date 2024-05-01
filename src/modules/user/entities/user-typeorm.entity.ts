@@ -27,9 +27,6 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   @Column('boolean', { default: false })
   isSoundEnabled: boolean;
 
-  @Column('boolean', { default: false })
-  isVibrationEnabled: boolean;
-
   @OneToMany(() => TaskTypeormEntity, (task) => task.user)
   tasks?: TaskTypeormEntity[];
 

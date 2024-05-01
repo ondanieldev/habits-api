@@ -21,9 +21,6 @@ export class CreateAppointmentDto
 
   @IsBoolean()
   isSoundEnabled: boolean;
-
-  @IsBoolean()
-  isVibrationEnabled: boolean;
 }
 
 export class UpdateAppointmentDto extends CreateAppointmentDto {

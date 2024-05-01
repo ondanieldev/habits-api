@@ -47,7 +47,4 @@ export class CreateTaskDto
 
   @IsBoolean()
   isSoundEnabled: boolean;
-
-  @IsBoolean()
-  isVibrationEnabled: boolean;
 }

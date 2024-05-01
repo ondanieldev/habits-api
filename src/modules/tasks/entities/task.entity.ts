@@ -15,7 +15,6 @@ export class TaskEntity extends BaseEntity {
   daysOfWeek: string;
   isNotificationEnabled: boolean;
   isSoundEnabled: boolean;
-  isVibrationEnabled: boolean;
   userId: string;
   user?: UserEntity;
 }

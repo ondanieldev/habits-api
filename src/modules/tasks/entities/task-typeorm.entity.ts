@@ -33,9 +33,6 @@ export class TaskTypeormEntity extends BaseTypeormEntity implements TaskEntity {
   @Column('boolean', { default: false })
   isSoundEnabled: boolean;
 
-  @Column('boolean', { default: false })
-  isVibrationEnabled: boolean;
-
   @Column('uuid')
   userId: string;
 

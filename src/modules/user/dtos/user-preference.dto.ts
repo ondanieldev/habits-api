@@ -8,7 +8,4 @@ export class UpsertUserPreferenceDto implements UpsertUserPreferenceBo {
 
   @IsBoolean()
   isSoundEnabled: boolean;
-
-  @IsBoolean()
-  isVibrationEnabled: boolean;
 }

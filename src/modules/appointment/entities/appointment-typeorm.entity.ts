@@ -26,9 +26,6 @@ export class AppointmentTypeormEntity
   @Column('boolean', { default: false })
   isSoundEnabled: boolean;
 
-  @Column('boolean', { default: false })
-  isVibrationEnabled: boolean;
-
   @Column('uuid')
   userId: string;
 

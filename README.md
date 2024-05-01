@@ -38,8 +38,3 @@
 - Avoid creating completed tasks more than two days ahead from today
 - Tests
 - Separate habits and reminders into two separate tables
-
-## Bugs
-
-- Remove lowercase from task/appointment name
-- Trim before inserting

@@ -12,7 +12,6 @@ export class UserEntity extends BaseEntity {
   accessToken?: string | null;
   isNotificationEnabled: boolean;
   isSoundEnabled: boolean;
-  isVibrationEnabled: boolean;
   tasks?: TaskEntity[];
   appointments?: AppointmentEntity[];
 }
