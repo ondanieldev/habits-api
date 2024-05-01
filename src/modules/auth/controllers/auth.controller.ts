@@ -32,8 +32,6 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
-  @Get('profile')
-  readProfile(@CurrentUser() user: UserEntity) {
-    return user;
-  }
+  @Get('ping')
+  readProfile() {}
 }
