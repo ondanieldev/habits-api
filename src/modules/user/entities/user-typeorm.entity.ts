@@ -22,6 +22,9 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   accessToken?: string | null;
 
   @Column('boolean', { default: false })
+  isNotificationEnabled: boolean;
+
+  @Column('boolean', { default: false })
   isSoundEnabled: boolean;
 
   @Column('boolean', { default: false })
