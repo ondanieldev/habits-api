@@ -24,9 +24,9 @@ export class UpdateTablesAddPreferences1714570097038
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.addColumns('users', fields);
-    await queryRunner.addColumns('tasks', fields);
-    await queryRunner.addColumns('appointments', fields);
+    for (const table of tables) {
+      await queryRunner.addColumns(table, fields);
+    }
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
