@@ -1,3 +1,3 @@
-export const emailTemplates = ['verify-email'] as const;
+export const emailTemplates = ['verify-email', 'reset-password'] as const;
 
 export type EmailTemplate = (typeof emailTemplates)[number];

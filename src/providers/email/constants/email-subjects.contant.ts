@@ -8,4 +8,8 @@ export const emailSubjects: Record<EmailTemplate, EmailSubject> = {
     'en-US': 'Verify your email',
     'pt-BR': 'Verifique seu email',
   },
+  'reset-password': {
+    'en-US': 'Reset your password',
+    'pt-BR': 'Redefina sua senha',
+  },
 };
