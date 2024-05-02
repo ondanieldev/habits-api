@@ -6,14 +6,14 @@ type Text = Record<EmailLocales, string>;
 export const regexTexts: Record<EmailTemplate, Text> = {
   'verify-email': {
     'en-US':
-      'Please verify your email by using the following code: {{verifyEmailToken}}. It will be valid for 1 hour.',
+      'Please verify your email by using the following code: {{token}}. It will be valid for 1 hour.',
     'pt-BR':
-      'Por favor, verifique seu email usando o seguinte código: {{verifyEmailToken}}. Ele será válido por 1 hora.',
+      'Por favor, verifique seu email usando o seguinte código: {{token}}. Ele será válido por 1 hora.',
   },
   'reset-password': {
     'en-US':
-      'Please reset your password by using the following code: {{resetPasswordToken}}. It will be valid for 1 hour. If you did not request this, please ignore this email.',
+      'Please reset your password by using the following code: {{token}}. It will be valid for 1 hour. If you did not request this, please ignore this email.',
     'pt-BR':
-      'Por favor, redefina sua senha usando o seguinte código: {{resetPasswordToken}}. Ele será válido por 1 hora. Se você não solicitou isso, ignore este email.',
+      'Por favor, redefina sua senha usando o seguinte código: {{token}}. Ele será válido por 1 hora. Se você não solicitou isso, ignore este email.',
   },
 };
