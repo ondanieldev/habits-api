@@ -12,6 +12,9 @@ export class UserEntity extends BaseEntity {
   accessToken?: string | null;
   isNotificationEnabled: boolean;
   isSoundEnabled: boolean;
+  isEmailVerified: boolean;
+  verifyEmailToken: string | null;
+  verifyEmailTokenExpiresAt: Date | null;
   tasks?: TaskEntity[];
   appointments?: AppointmentEntity[];
 }

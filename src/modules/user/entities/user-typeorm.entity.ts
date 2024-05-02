@@ -27,6 +27,17 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   @Column('boolean', { default: false })
   isSoundEnabled: boolean;
 
+  @Column('boolean', { default: false })
+  isEmailVerified: boolean;
+
+  @Exclude()
+  @Column('varchar', { nullable: true })
+  verifyEmailToken: string | null;
+
+  @Exclude()
+  @Column('timestamp', { nullable: true })
+  verifyEmailTokenExpiresAt: Date | null;
+
   @OneToMany(() => TaskTypeormEntity, (task) => task.user)
   tasks?: TaskTypeormEntity[];
 
