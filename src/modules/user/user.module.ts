@@ -8,7 +8,10 @@ import { HashModule } from 'providers/hash/hash.module';
 import { UserPreferenceController } from './controllers/user-preference.controller';
 import { UserVerifyEmailController } from './controllers/user-verify-email.controller';
 import { UserController } from './controllers/user.controller';
+import { UserTokenTypeormEntity } from './entities/user-token-typeorm.entity';
 import { UserTypeormEntity } from './entities/user-typeorm.entity';
+import { UserTokenTypeormRepository } from './repositories/user-token-typeorm.repository';
+import { UserTokenRepository } from './repositories/user-token.repository';
 import { UserTypeormRepository } from './repositories/user-typeorm.repository';
 import { UserRepository } from './repositories/user.repository';
 import { UserPreferenceService } from './services/user-preference.service';
@@ -26,7 +29,7 @@ import { UserService } from './services/user.service';
     CacheModule,
     EmailModule,
     HashModule,
-    TypeOrmModule.forFeature([UserTypeormEntity]),
+    TypeOrmModule.forFeature([UserTypeormEntity, UserTokenTypeormEntity]),
   ],
   providers: [
     UserService,
@@ -35,6 +38,10 @@ import { UserService } from './services/user.service';
     {
       provide: UserRepository,
       useClass: UserTypeormRepository,
+    },
+    {
+      provide: UserTokenRepository,
+      useClass: UserTokenTypeormRepository,
     },
   ],
 })
