@@ -1,4 +1,8 @@
-import { ConflictException, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 
 export class UserNotFoundException extends NotFoundException {
   constructor(id?: string) {
@@ -9,5 +13,11 @@ export class UserNotFoundException extends NotFoundException {
 export class UserEmailConflictException extends ConflictException {
   constructor(email?: string) {
     super(`Email ${email || ''} is already in use`);
+  }
+}
+
+export class UserEmailAlreadyVerifiedException extends BadRequestException {
+  constructor() {
+    super('Email is already verified');
   }
 }
