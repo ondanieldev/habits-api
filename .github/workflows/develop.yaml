@@ -43,8 +43,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
+            exec bash \-l
             cd ~/habits-api
             cp ~/backup/habits-api/.env ~/habits-api/.env 
             yarn install
