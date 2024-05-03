@@ -11,7 +11,6 @@ export type UserRelation = (typeof userRelations)[number];
 export class UserEntity extends BaseEntity {
   email: string;
   password: string;
-  accessToken?: string | null;
   isNotificationEnabled: boolean;
   isSoundEnabled: boolean;
   isEmailVerified: boolean;
