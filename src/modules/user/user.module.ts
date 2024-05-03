@@ -6,6 +6,7 @@ import { EmailModule } from 'providers/email/email.module';
 import { HashModule } from 'providers/hash/hash.module';
 
 import { ResetPasswordController } from './controllers/reset-password.controller';
+import { UserEmailController } from './controllers/user-email.controller';
 import { UserPreferenceController } from './controllers/user-preference.controller';
 import { UserController } from './controllers/user.controller';
 import { VerifyEmailController } from './controllers/verify-email.controller';
@@ -16,6 +17,7 @@ import { UserTokenRepository } from './repositories/user-token.repository';
 import { UserTypeormRepository } from './repositories/user-typeorm.repository';
 import { UserRepository } from './repositories/user.repository';
 import { ResetPasswordService } from './services/reset-password.service';
+import { UserEmailService } from './services/user-email.service';
 import { UserPreferenceService } from './services/user-preference.service';
 import { UserTokenService } from './services/user-token.service';
 import { UserService } from './services/user.service';
@@ -25,6 +27,7 @@ import { VerifyEmailService } from './services/verify-email.service';
   controllers: [
     ResetPasswordController,
     UserController,
+    UserEmailController,
     UserPreferenceController,
     VerifyEmailController,
   ],
@@ -38,6 +41,7 @@ import { VerifyEmailService } from './services/verify-email.service';
   providers: [
     ResetPasswordService,
     UserService,
+    UserEmailService,
     UserPreferenceService,
     UserTokenService,
     VerifyEmailService,

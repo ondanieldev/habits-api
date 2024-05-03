@@ -11,11 +11,9 @@ import { HashService } from 'providers/hash/services/hash.service';
 
 import { CreateUserBo } from '../bos/user.bo';
 import { UserEntity } from '../entities/user.entity';
-import {
-  UserEmailConflictException,
-  UserNotFoundException,
-} from '../exceptions/user.exception';
+import { UserNotFoundException } from '../exceptions/user.exception';
 import { UserRepository } from '../repositories/user.repository';
+import { UserEmailService } from './user-email.service';
 
 @Injectable()
 export class UserService implements OnModuleInit {
@@ -23,6 +21,7 @@ export class UserService implements OnModuleInit {
     private readonly cacheService: CacheService,
     private readonly hashService: HashService,
     private readonly userRepository: UserRepository,
+    private readonly userEmailService: UserEmailService,
   ) {}
 
   async onModuleInit() {
@@ -48,15 +47,8 @@ export class UserService implements OnModuleInit {
     password,
     ...rest
   }: CreateUserBo): Promise<UserEntity> {
-    let user = await this.userRepository.find({
-      data: {
-        email,
-      },
-    });
-    if (user) {
-      throw new UserEmailConflictException(email);
-    }
-    user = await this.userRepository.create({
+    await this.userEmailService.validate({ email });
+    const user = await this.userRepository.create({
       ...rest,
       email,
       password: await this.hashService.hashify(password),
