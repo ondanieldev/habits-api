@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CacheModule } from 'providers/cache/cache.module';
@@ -12,6 +13,7 @@ import { UserController } from './controllers/user.controller';
 import { VerifyEmailController } from './controllers/verify-email.controller';
 import { UserTokenTypeormEntity } from './entities/user-token-typeorm.entity';
 import { UserTypeormEntity } from './entities/user-typeorm.entity';
+import { EmailVerifiedGuard } from './guards/email-verified.guard';
 import { UserTokenTypeormRepository } from './repositories/user-token-typeorm.repository';
 import { UserTokenRepository } from './repositories/user-token.repository';
 import { UserTypeormRepository } from './repositories/user-typeorm.repository';
@@ -52,6 +54,10 @@ import { VerifyEmailService } from './services/verify-email.service';
     {
       provide: UserTokenRepository,
       useClass: UserTokenTypeormRepository,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: EmailVerifiedGuard,
     },
   ],
 })

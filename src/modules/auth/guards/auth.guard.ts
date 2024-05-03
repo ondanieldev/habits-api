@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
     if (isPublicRoute) {
-      // 💡 See this condition
       return true;
     }
 

@@ -3,6 +3,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 
+import { EmailNotVerifiedRoute } from '../decorators/is-email-not-verified-route.decorator';
 import { UpdateUserEmailDto } from '../dtos/user-email.dto';
 import { UserEntity } from '../entities/user.entity';
 import { UserEmailService } from '../services/user-email.service';
@@ -13,6 +14,7 @@ export class UserEmailController {
   constructor(private readonly userEmailService: UserEmailService) {}
 
   @ApiBearerAuth()
+  @EmailNotVerifiedRoute()
   @Patch()
   readProfile(
     @CurrentUser() user: UserEntity,

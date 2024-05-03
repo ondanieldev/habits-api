@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { PublicRoute } from 'modules/auth/decorators/is-public-route.decorator';
 
+import { EmailNotVerifiedRoute } from '../decorators/is-email-not-verified-route.decorator';
 import {
   GenerateResetPasswordTokenDto,
   ResetPasswordDto,
@@ -16,6 +17,7 @@ export class ResetPasswordController {
   constructor(private readonly resetPasswordService: ResetPasswordService) {}
 
   @PublicRoute()
+  @EmailNotVerifiedRoute()
   @Post('/generate-token')
   @HttpCode(204)
   async generateToken(@Body() dto: GenerateResetPasswordTokenDto) {
@@ -23,6 +25,7 @@ export class ResetPasswordController {
   }
 
   @PublicRoute()
+  @EmailNotVerifiedRoute()
   @Post('/validate-token')
   @HttpCode(204)
   async validateToken(@Body() dto: ValidateResetPasswordTokenDto) {
@@ -30,6 +33,7 @@ export class ResetPasswordController {
   }
 
   @PublicRoute()
+  @EmailNotVerifiedRoute()
   @Post()
   @HttpCode(204)
   async resetPassword(@Body() dto: ResetPasswordDto) {
