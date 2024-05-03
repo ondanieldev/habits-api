@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
 import { IS_PUBLIC_ROUTE_KEY } from 'modules/auth/decorators/is-public-route.decorator';
+import { UserTokenService } from 'modules/user/services/user-token.service';
 import { UserService } from 'modules/user/services/user.service';
 
 import { AuthUserBo } from '../bos/auth.bo';
@@ -20,6 +21,7 @@ export class AuthGuard implements CanActivate {
     private jwtService: JwtService,
     private reflector: Reflector,
     private userService: UserService,
+    private userTokenService: UserTokenService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -39,16 +41,22 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
-      const payload: AuthUserBo = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
+      const { sub: userId }: AuthUserBo = await this.jwtService.verifyAsync(
+        token,
+        {
+          secret: jwtConstants.secret,
+        },
+      );
+
+      const userToken = await this.userTokenService.validate({
+        token,
+        userId,
       });
 
-      const user = await this.userService.read({ id: payload.sub });
-      if (user.accessToken !== token) {
-        throw new Error();
-      }
+      const user = await this.userService.read({ id: userId });
 
       request['user'] = user;
+      request['userToken'] = userToken;
     } catch {
       throw new UnauthorizedException();
     }

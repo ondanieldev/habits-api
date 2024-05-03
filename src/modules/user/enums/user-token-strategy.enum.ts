@@ -1,3 +1,3 @@
-export const userTokenStrategies = ['uuid'] as const;
+export const userTokenStrategies = ['jwt', 'uuid'] as const;
 
 export type UserTokenStrategy = (typeof userTokenStrategies)[number];

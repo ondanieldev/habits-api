@@ -2,7 +2,9 @@ import { UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserFakeRepository } from 'modules/user/repositories/user-fake.repository';
+import { UserTokenRepository } from 'modules/user/repositories/user-token.repository';
 import { UserRepository } from 'modules/user/repositories/user.repository';
+import { UserTokenService } from 'modules/user/services/user-token.service';
 import { UserService } from 'modules/user/services/user.service';
 
 import { CacheService } from 'providers/cache/services/cache.service';
@@ -19,7 +21,9 @@ describe('AuthService', () => {
   let hashService: HashService;
   let jwtService: JwtService;
   let userRepository: UserRepository;
+  let userTokenRepository: UserTokenRepository;
   let userService: UserService;
+  let userTokenService: UserTokenService;
 
   beforeEach(async () => {
     cacheService = new CacheService();
@@ -28,9 +32,11 @@ describe('AuthService', () => {
     // @ts-ignore
     jwtService = new JwtFakeService();
     userRepository = new UserFakeRepository();
+    userTokenRepository = new UserTokenRepository();
     userService = new UserService(cacheService, hashService, userRepository);
+    userTokenService = new UserTokenService(jwtService, userTokenRepository);
 
-    service = new AuthService(hashService, jwtService, userService);
+    service = new AuthService(hashService, userService, userTokenService);
   });
 
   it('should sign user in', async () => {
@@ -42,7 +48,7 @@ describe('AuthService', () => {
       email: 'john.doe@gmail.com',
       password: 'password',
     });
-    expect(result.accessToken).toBeDefined();
+    expect(result.token).toBeDefined();
   });
 
   it('should throw unauthorized exception when trying to sign user in with invalid password', async () => {

@@ -28,7 +28,7 @@ import { VerifyEmailService } from './services/verify-email.service';
     UserPreferenceController,
     VerifyEmailController,
   ],
-  exports: [UserRepository, UserService],
+  exports: [UserRepository, UserService, UserTokenService],
   imports: [
     CacheModule,
     EmailModule,

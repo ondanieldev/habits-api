@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { addHours, isPast } from 'date-fns';
+import { JwtService } from '@nestjs/jwt';
+import { addHours, addMilliseconds, isPast } from 'date-fns';
 import { v4 } from 'uuid';
+
+import { jwtConstants } from 'modules/auth/constants/auth.constant';
 
 import {
   CreateUserTokenBo,
@@ -17,14 +20,27 @@ import { UserTokenRepository } from '../repositories/user-token.repository';
 
 @Injectable()
 export class UserTokenService {
-  constructor(private readonly userTokenRepository: UserTokenRepository) {}
+  constructor(
+    private jwtService: JwtService,
+    private readonly userTokenRepository: UserTokenRepository,
+  ) {}
 
   private generateRandomUuid(): string {
     return v4().split('-')[0];
   }
 
-  private generateDefaultExpiresAt(): Date {
+  private async generateJwt(userId: string): Promise<string> {
+    return this.jwtService.signAsync({
+      sub: userId,
+    });
+  }
+
+  private generateRandomUuidExpiresAt(): Date {
     return addHours(new Date(), 1);
+  }
+
+  private generateJwtExpiresAt(): Date {
+    return addMilliseconds(new Date(), jwtConstants.expiresInMs);
   }
 
   private async upsert({
@@ -70,9 +86,13 @@ export class UserTokenService {
 
     // Fill token and expire data given strategy
     switch (strategy) {
+      case 'jwt':
+        token = await this.generateJwt(userId);
+        expiresAt = this.generateJwtExpiresAt();
+        break;
       case 'uuid':
         token = this.generateRandomUuid();
-        expiresAt = this.generateDefaultExpiresAt();
+        expiresAt = this.generateRandomUuidExpiresAt();
         break;
       default:
         break;
@@ -118,5 +138,15 @@ export class UserTokenService {
 
   public async delete(id: string): Promise<void> {
     await this.userTokenRepository.delete(id);
+  }
+
+  public async read(data: Partial<UserTokenEntity>): Promise<UserTokenEntity> {
+    const userToken = await this.userTokenRepository.find({ data });
+
+    if (!userToken) {
+      throw new UserTokenInvalidException();
+    }
+
+    return userToken;
   }
 }

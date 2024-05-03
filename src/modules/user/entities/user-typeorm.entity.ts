@@ -18,10 +18,6 @@ export class UserTypeormEntity extends BaseTypeormEntity implements UserEntity {
   @Column('varchar')
   password: string;
 
-  @Exclude()
-  @Column('varchar')
-  accessToken?: string | null;
-
   @Column('boolean', { default: false })
   isNotificationEnabled: boolean;
 
