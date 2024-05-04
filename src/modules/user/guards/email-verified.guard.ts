@@ -7,6 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 
 import { IS_EMAIL_NOT_VERIFIED_ROUTE } from '../decorators/is-email-not-verified-route.decorator';
+import { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class EmailVerifiedGuard implements CanActivate {
@@ -23,9 +24,9 @@ export class EmailVerifiedGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
 
-    const user = request['user'];
+    const user: UserEntity = request['user'];
 
-    if (!user?.emailVerified) {
+    if (!user?.isEmailVerified) {
       throw new UnauthorizedException();
     }
 
