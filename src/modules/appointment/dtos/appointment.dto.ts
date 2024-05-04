@@ -15,12 +15,6 @@ export class CreateAppointmentDto
   @IsString()
   @Trim()
   name: string;
-
-  @IsBoolean()
-  isNotificationEnabled: boolean;
-
-  @IsBoolean()
-  isSoundEnabled: boolean;
 }
 
 export class UpdateAppointmentDto extends CreateAppointmentDto {

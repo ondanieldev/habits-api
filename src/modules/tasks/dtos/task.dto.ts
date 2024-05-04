@@ -1,13 +1,5 @@
 import { Transform } from 'class-transformer';
-import {
-  ArrayMinSize,
-  IsBoolean,
-  IsIn,
-  IsInt,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { ArrayMinSize, IsIn, IsInt, IsString, Max, Min } from 'class-validator';
 
 import { ToLowerCase } from 'modules/auth/decorators/to-lower-case.decorator';
 import { Trim } from 'modules/auth/decorators/trim.decorator';
@@ -41,10 +33,4 @@ export class CreateTaskDto
 
   @IsMinute()
   minutes: number;
-
-  @IsBoolean()
-  isNotificationEnabled: boolean;
-
-  @IsBoolean()
-  isSoundEnabled: boolean;
 }

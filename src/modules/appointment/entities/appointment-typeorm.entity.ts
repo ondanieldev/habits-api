@@ -20,12 +20,6 @@ export class AppointmentTypeormEntity
   @Column('boolean')
   isCompleted: boolean;
 
-  @Column('boolean', { default: false })
-  isNotificationEnabled: boolean;
-
-  @Column('boolean', { default: false })
-  isSoundEnabled: boolean;
-
   @Column('uuid')
   userId: string;
 

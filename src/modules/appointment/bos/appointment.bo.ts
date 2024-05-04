@@ -2,7 +2,7 @@ import { AppointmentEntity } from '../entities/appointment.entity';
 
 export type CreateAppointmentBo = Pick<
   AppointmentEntity,
-  'date' | 'name' | 'userId' | 'isNotificationEnabled' | 'isSoundEnabled'
+  'date' | 'name' | 'userId'
 >;
 
 export type ReadAppointmentBo = Partial<AppointmentEntity> & {
