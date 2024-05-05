@@ -2,7 +2,11 @@
   "name": "habits-api",
   "version": "0.0.1",
   "description": "API to provide and manage data of habits app.",
-  "author": "Spiry Capital",
+  "author": {
+    "email": "me@ondaniel.com.br",
+    "name": "Daniel Nascimento",
+    "url": "https://ondaniel.com.br"
+  },
   "private": true,
   "license": "MIT",
   "repository": {
@@ -102,5 +106,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
