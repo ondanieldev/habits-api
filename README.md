@@ -67,4 +67,4 @@ If you want to contribute, please check [contributing](https://github.com/ondani
 - [Roadmap](https://ondanieldev.notion.site/Rabbits-Roadmap-05a85728e4d946cd8b4fb51dea256ce0)
 - [Swagger](https://rabbits-api.ondaniel.com.br/api)
 
-- [Rabbits Mobile repository](https://github.com/ondanieldev/rabbits-api)
+- [Rabbits Mobile repository](https://github.com/ondanieldev/rabbits-mobile)
