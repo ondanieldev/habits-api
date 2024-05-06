@@ -1,5 +1,6 @@
 export const openApiConstants = Object.freeze({
-  title: 'Habits API',
-  description: 'API to provide and manage data of habits app.',
+  title: 'Rabbits API',
+  description:
+    'Rabbits API is a RESTful API built to be integrated by Rabbits Mobile app.',
   version: 'v1',
 });
