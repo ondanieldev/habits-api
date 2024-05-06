@@ -1,4 +1,4 @@
-# Habits API
+# Rabbits API
 
 ## How to setup
 
@@ -28,9 +28,9 @@
 
 ## Links
 
-- [Habits API](https://habits-api.ondaniel.com.br)
-- [Habits API Insomnia](https://github.com/ondanieldev/habits-api-insomnia)
-- [Habits API Swagger](https://habits-api.ondaniel.com.br/api)
+- [Rabbits API](https://rabbits-api.ondaniel.com.br)
+- [Rabbits API Insomnia](https://github.com/ondanieldev/rabbits-api-insomnia)
+- [Rabbits API Swagger](https://rabbits-api.ondaniel.com.br/api)
 
 ## Roadmap
 

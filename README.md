@@ -1,8 +1,8 @@
-# Habits API
+# Rabbits API
 
 ## Description
 
-Habits API is a RESTful API built to be integrated by Habits Mobile app.
+Rabbits API is a RESTful API built to be integrated by Rabbits Mobile app.
 
 ## How to setup
 
@@ -58,13 +58,13 @@ Habits API is a RESTful API built to be integrated by Habits Mobile app.
 
 ## How to contribute
 
-If you want to contribute, please check [contributing](https://github.com/ondanieldev/habits-api/blob/master/CONTRIBUTING.md).
+If you want to contribute, please check [contributing](https://github.com/ondanieldev/rabbits-api/blob/master/CONTRIBUTING.md).
 
 ## Links
 
-- [API](https://habits-api.ondaniel.com.br)
-- [Insomnia](https://github.com/ondanieldev/habits-api-insomnia)
-- [Roadmap](https://ondanieldev.notion.site/Habits-Roadmap-05a85728e4d946cd8b4fb51dea256ce0)
-- [Swagger](https://habits-api.ondaniel.com.br/api)
+- [API](https://rabbits-api.ondaniel.com.br)
+- [Insomnia](https://github.com/ondanieldev/rabbits-api-insomnia)
+- [Roadmap](https://ondanieldev.notion.site/Rabbits-Roadmap-05a85728e4d946cd8b4fb51dea256ce0)
+- [Swagger](https://rabbits-api.ondaniel.com.br/api)
 
-- [Habits Mobile repository](https://github.com/ondanieldev/habits-api)
+- [Rabbits Mobile repository](https://github.com/ondanieldev/rabbits-api)

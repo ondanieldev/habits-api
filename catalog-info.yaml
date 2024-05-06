@@ -1,13 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: habits-api
-  description: API to provide and manage data of habits app.
+  name: rabbits-api
+  description: API to provide and manage data of rabbits app.
   annotations:
-    github.com/project-slug: https://github.com/ondanieldev/habits-api
+    github.com/project-slug: https://github.com/ondanieldev/rabbits-api
     backstage.io/techdocs-ref: dir:.
   links:
-    - url: https://habits-api.ondaniel.com.br
+    - url: https://rabbits-api.ondaniel.com.br
       title: API entrypoint
       icon: api
 spec:

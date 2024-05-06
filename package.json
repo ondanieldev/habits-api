@@ -1,7 +1,7 @@
 {
-  "name": "habits-api",
+  "name": "rabbits-api",
   "version": "0.0.1",
-  "description": "API to provide and manage data of habits app.",
+  "description": "Rabbits API is a RESTful API built to be integrated by Rabbits Mobile app.",
   "author": {
     "email": "me@ondaniel.com.br",
     "name": "Daniel Nascimento",
@@ -11,12 +11,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ondanieldev/habits-api"
+    "url": "https://github.com/ondanieldev/rabbits-api"
   },
   "scripts": {
     "build": "nest build",
     "docker": "yarn docker:build && yarn docker:up",
-    "docker:build": "docker image build . -f Dockerfile --tag ondanieldev/habits-api",
+    "docker:build": "docker image build . -f Dockerfile --tag ondanieldev/rabbits-api",
     "docker:stop": "docker-compose stop",
     "docker:up": "docker-compose up -d",
     "fix": "yarn fix:eslint && yarn fix:prettier",
