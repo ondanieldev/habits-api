@@ -30,7 +30,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: '.,!node_modules'
-          target: '~/habits-api'
+          target: '~/rabbits-api'
           overwrite: true
           rm: true
           timeout: 300s
@@ -43,7 +43,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/habits-api
-            cp ~/backup/habits-api/.env ~/habits-api/.env 
+            nvm use --lts
+            cd ~/rabbits-api
+            cp ~/backup/rabbits-api/.env ~/rabbits-api/.env 
             yarn install
             yarn docker
