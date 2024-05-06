@@ -2,8 +2,8 @@ version: '3'
 
 services:
   api:
-    container_name: habits-api
-    image: ondanieldev/habits-api:latest 
+    container_name: rabbits-api
+    image: ondanieldev/rabbits-api:latest 
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
@@ -12,12 +12,12 @@ services:
     restart: unless-stopped
 
   postgresql:
-    container_name: habits-api_postgresql
+    container_name: rabbits-api_postgresql
     image: bitnami/postgresql:15.1.0
     ports:
       - ${POSTGRESQL_PORT_LOCAL}:${POSTGRESQL_PORT_DOCKER}
     volumes:
-      - habits-api_postgresql_volume:/bitnami/postgresql
+      - rabbits-api_postgresql_volume:/bitnami/postgresql
     environment:
       - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
 
   redis:
-    container_name: habits-api_redis
+    container_name: rabbits-api_redis
     image: redis:7.0.7
     ports:
       - ${REDIS_PORT_LOCAL}:${REDIS_PORT_DOCKER}
@@ -34,4 +34,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  habits-api_postgresql_volume:
+  rabbits-api_postgresql_volume:
