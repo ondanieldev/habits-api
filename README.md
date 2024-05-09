@@ -92,7 +92,7 @@ Rabbits API is a RESTful API built to be integrated by Rabbits Mobile app.
 
 ## How to contribute
 
-If you want to contribute, please check [contributing](https://github.com/ondanieldev/rabbits-api/blob/master/CONTRIBUTING.md).
+If you want to contribute, please check [contributing](https://github.com/ondanieldev/rabbits-api/blob/HEAD/CONTRIBUTING.md).
 
 ## Links
 
