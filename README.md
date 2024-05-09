@@ -1,5 +1,39 @@
-# Rabbits API
+<!-- Title -->
+<h1 align="center">
+  <img src="https://github.com/ondanieldev/rabbits-api/blob/HEAD/public/images/logo.png" alt="Logo" height="77px" />
+  <br />
+  <a href="#" style="color: #51CF66;">
+    Rabbits API
+  </a>
+</h1>
 
+<!-- Slogan -->
+<p align="center">
+  <strong>A RESTful API to manage your routine</strong><br>
+  Currently on experimental phase
+</p>
+
+<!-- GitHub Badges -->
+<p align="center">
+  <a href="https://github.com/ondanieldev/rabbits-api/blob/HEAD/package.json">
+    <img src="https://github.com/ondanieldev/rabbits-api/actions/workflows/develop.yaml/badge.svg" alt="CI status." />
+  </a>
+</p>
+
+<!-- Repository Badges -->
+<p align="center">
+  <a href="https://github.com/ondanieldev/rabbits-api/blob/HEAD/package.json">
+    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fondanieldev%2Frabbits-api%2Fraw%2FHEAD%2Fpackage.json&query=%24.version&label=Current%20version&color=51CF66" alt="Current version." />
+  </a>
+  <a href="https://github.com/ondanieldev/rabbits-api/blob/HEAD/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-51CF66.svg" alt="Released under the MIT license." />
+  </a>
+  <a href="https://github.com/ondanieldev/rabbits-api/blob/HEAD/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-Welcome-51CF66.svg" alt="PRs welcome!" />
+  </a>
+</p>
+
+<!-- Body -->
 ## Description
 
 Rabbits API is a RESTful API built to be integrated by Rabbits Mobile app.
@@ -24,15 +58,15 @@ Rabbits API is a RESTful API built to be integrated by Rabbits Mobile app.
 
 - Run `yarn start:dev`.
 
-## Testing
+## How to test
 
-### Unit tests
+### Running unit tests
 
 - Run `yarn test:unit` to execute tests;
 - Run `yarn test:unit:cov` to execute tests and generate coverage reports:
   - Coverage reports will be available under `test/coverage` folder.
 
-## Linting
+## How to lint
 
 - Run `yarn fix` to fix linting issues;
 - Run `yarn lint` to check for linting issues. If some of them was not solved by `yarn fix`, you will see related files and description on terminal, so you can manually solve them.
@@ -66,5 +100,4 @@ If you want to contribute, please check [contributing](https://github.com/ondani
 - [Insomnia](https://github.com/ondanieldev/rabbits-api-insomnia)
 - [Roadmap](https://ondanieldev.notion.site/Rabbits-Roadmap-05a85728e4d946cd8b4fb51dea256ce0)
 - [Swagger](https://rabbits-api.ondaniel.com.br/api)
-
 - [Rabbits Mobile repository](https://github.com/ondanieldev/rabbits-mobile)
